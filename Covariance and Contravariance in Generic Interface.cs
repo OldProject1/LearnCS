@@ -31,7 +31,7 @@ namespace SandBox
         {
             IZoo<Animal> animalZoo = new Zoo();
             IZoo<Cat> catZoo = new CatZoo();
-            //animalZoo = catzoo;
+            //animalZoo = catZoo;
             catZoo = animalZoo;
         }
     }
