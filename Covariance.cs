@@ -11,24 +11,26 @@ namespace SandBox
 
     class V8Engine : Engine { }
 
-    interface ICar<out T> where T : Engine {
+    interface ICar<out T>
+    {
         T GetEngine();
     }
 
-    class Lada : ICar<V8Engine>
+    class Lada<T> : ICar<T> where T : Engine, new()
     {
-        public V8Engine GetEngine()
+        public T GetEngine()
         {
-            return new V8Engine();
+            return new T();
         }
     }
 
-    class MyClass {
+    class MyClass
+    {
         static void Main(string[] args)
         {
-            Lada lada = new Lada();
-            ICar<V8Engine> vEightCar = lada;
-            ICar<Engine> someCar = lada;
+            ICar<Engine> lada = new Lada<V8Engine>();
+            //ICar<V8Engine> vEightCar = lada; //error
+
         }
     }
 }
