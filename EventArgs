@@ -1,0 +1,25 @@
+using System;
+using System.Text;
+
+namespace SandBox
+{
+    class MyArgs : EventArgs { public int DataAboutEvent { get; set; }}
+
+    class Button
+    {
+        public event EventHandler<MyArgs> EventAction;
+        public void Press() => EventAction?.Invoke(this, new MyArgs { DataAboutEvent = 3350 });
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Button pa = new Button();
+
+            pa.EventAction += (o,e) => Console.WriteLine(e.DataAboutEvent);
+
+            pa.Press();
+        }
+    }
+}
