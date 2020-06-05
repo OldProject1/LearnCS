@@ -1,0 +1,33 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace SandBox
+{
+    static class DataOperations
+    {
+        public static void ConsoleOutput<T>(T data) => Console.WriteLine(data);
+        public static void ConsoleOutputArr<T>(IEnumerable<T> data)
+        {
+            foreach (var item in data)
+            {
+                Console.WriteLine(item);
+            }
+        }
+    }
+
+    delegate void Operation<T>(T data);
+    
+    class Programm
+    {
+        public static async void PerformOperationAsync<T>(T data, Operation<T> output) => await Task.Run(() => output(data));
+        public static void Main()
+        {
+            PerformOperationAsync("hello", DataOperations.ConsoleOutput);
+            PerformOperationAsync("world!", DataOperations.ConsoleOutput);
+            PerformOperationAsync(new int[] { 1, 2, 3, 4 }, DataOperations.ConsoleOutputArr);
+            PerformOperationAsync(new int[] { 1, 2, 3, 4 }, DataOperations.ConsoleOutputArr);
+            Console.Read();
+        }
+    }
+}
